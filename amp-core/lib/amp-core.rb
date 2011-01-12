@@ -29,6 +29,7 @@ module Amp
     end
     module Support
       autoload :EncodingUtils,  'amp-core/support/encoding_utils.rb'
+      autoload :FileUtils,      'amp-core/support/file_utils.rb'
       autoload :HexString,      'amp-core/support/hex_string.rb'
       autoload :Platform,       'amp-core/support/platform_utils.rb'
       autoload :RootedOpener,   'amp-core/support/rooted_opener.rb'

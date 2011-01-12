@@ -134,7 +134,7 @@ module Amp
           if mode == 'r' # if we're doing a read, make this super snappy
             Kernel::open path, mode, &block
           else # we're doing a write
-            File::amp_atomic_write path, mode, @create_mode, dir, &block
+            Support::FileUtils.amp_atomic_write path, mode, @create_mode, dir, &block
           end
         end
       end
