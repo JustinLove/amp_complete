@@ -252,8 +252,7 @@ module Amp
         # @param node2
         # @return [[String], [String]] clean files and modified files
         def fix_files(lookup, node1, node2)
-          write_dirstate = false # this gets returned
-          modified = [] # and this
+          modified = [] # this gets returned
           fixup    = [] # fixup are files that haven't changed so they're being
                         # marked wrong in the dirstate. this gets returned
         
@@ -286,6 +285,7 @@ module Amp
           # the fixups are actually clean
           [fixup, modified]
         end
+        private :fix_files
       end
     
     end
