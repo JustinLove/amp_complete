@@ -34,7 +34,8 @@ module Amp
         # @param [String] filename the file to look up
         # @return [Boolean] are we tracking the given file?
         def tracking?(filename)
-          file_status(filename) != :untracked
+          status = file_status(filename)
+          status && status != :untracked
         end
       
         ##
