@@ -12,6 +12,8 @@
 #                                                                #
 ##################################################################
 
+require 'find'
+
 module Amp
   module Core
     module Repositories
