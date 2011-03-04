@@ -71,7 +71,6 @@ module Amp
               prefix = file + '/'
             
               unless all_files.find { |f, _| f == file || f.start_with?(prefix) }
-                bad_type[file]
                 results[file] = nil if (tracking?(file) || !ignoring_file?(file)) && match.call(file)
               end
             end

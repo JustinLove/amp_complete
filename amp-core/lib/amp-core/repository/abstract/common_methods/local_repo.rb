@@ -179,7 +179,7 @@ module Amp
         
           # are we working with working directories?
           working = node2.working?
-          comparing_to_tip = working && node2.parents.include?(node1)
+          comparing_to_tip = working && (node2.parents.include?(node1) || node2.parents.empty?)
         
           status = Hash.new {|h, k| h[k] = k == :delta ? 0 : [] }
         
