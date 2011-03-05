@@ -37,7 +37,7 @@ module Amp
         # @return [Boolean] are we tracking the given file?
         def tracking?(filename)
           status = file_status(filename)
-          status && status != :untracked
+          status && status != :untracked && status != :removed
         end
       
         ##
