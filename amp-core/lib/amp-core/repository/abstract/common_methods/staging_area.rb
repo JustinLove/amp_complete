@@ -126,6 +126,7 @@ module Amp
         # @return [Hash{String => [NilClass, File::Stat]}] nil for directories and
         #   stuff, File::Stat for files and links
         def walk(unknown, ignored, match = Amp::Match.new { true })
+          # ignore_all is currently hg specific
           if ignored
             @ignore_all = false
           elsif not unknown
@@ -146,12 +147,18 @@ module Amp
           results = find_with_patterns(results, work, match)
         
           # step 3: report unseen items in @files
-          visit = all_files.select {|f| !results[f] && match.call(f) }.sort
-        
-          visit.each do |file|
-            path = File.join(repo.root, file)
-            keep = File.exist?(path) && (File.file?(path) || File.symlink(path))
-            results[file] = keep ? File.lstat(path) : nil
+          if unknown
+            visit = repo[nil].all_files.select {|f| !results[f] && match.call(f) }.sort
+          
+            visit.each do |file|
+              path = File.join(repo.root, file)
+              keep = File.exist?(path) && (File.file?(path) || File.symlink(path))
+              results[file] = keep ? File.lstat(path) : nil
+            end
+          else
+            results.keys.each do |file|
+              results.delete(file) unless tracking?(file)
+            end
           end
         
           results.delete vcs_dir
